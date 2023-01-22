@@ -26,5 +26,28 @@ public static class Sorting
         if (j > leftSide) QuickSort(arrayToSort, leftSide, j);  // рекурсивно повторяем упражнение для левой от опорного элемента части
     }
 
-    
+    public static void QuickSort2(int[] arrayToSort, int leftSide, int rightSide)
+    {
+        if (leftSide >= rightSide) return;
+        int pivot = GetPivotIndex(arrayToSort, leftSide, rightSide);
+        QuickSort2(arrayToSort, leftSide, pivot - 1);
+        QuickSort2(arrayToSort, pivot + 1, rightSide);
+        return;
+    }
+
+    public static int GetPivotIndex(int[] inputArray, int minIndex, int maxIndex)
+    {
+        int pivotIndex = minIndex - 1;
+        for (int i = minIndex; i <= maxIndex; i++)
+        {
+            if (inputArray[i] < inputArray[maxIndex])
+            {
+                pivotIndex++;
+                Swap(ref inputArray[pivotIndex], ref inputArray[i]);
+            }
+        }
+        pivotIndex++;
+        Swap(ref inputArray[pivotIndex], ref inputArray[maxIndex]);
+        return pivotIndex;
+    }
 }
