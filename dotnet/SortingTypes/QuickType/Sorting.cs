@@ -23,31 +23,31 @@ public static class Sorting
             }
         }
         if (i < rightSide) QuickSort(arrayToSort, i, rightSide);  // рекурсивно повторяем упражнение для правой от опорного элемента части
-        if (j > leftSide) QuickSort(arrayToSort, leftSide, j);  // рекурсивно повторяем упражнение для левой от опорного элемента части
+        if (j > leftSide) QuickSort(arrayToSort, leftSide, j);    // рекурсивно повторяем упражнение для левой от опорного элемента части
     }
 
-    public static void QuickSort2(int[] arrayToSort, int leftSide, int rightSide)
+    public static void QuickSort2(int[] arrayToSort, int leftSide, int rightSide)  // leftSide и rightSide - индексы границ массива
     {
-        if (leftSide >= rightSide) return;
-        int pivot = GetPivotIndex(arrayToSort, leftSide, rightSide);
-        QuickSort2(arrayToSort, leftSide, pivot - 1);
-        QuickSort2(arrayToSort, pivot + 1, rightSide);
+        if (leftSide >= rightSide) return;  // задаем условие выхода из метода (границы сошлись, либо поменялись местами)
+        int pivot = GetPivotIndex(arrayToSort, leftSide, rightSide);  // инициализируем опорную точку через отдельный метод
+        QuickSort2(arrayToSort, leftSide, pivot - 1);   // рекурсивно запускаем метод для левой части массива
+        QuickSort2(arrayToSort, pivot + 1, rightSide);  // рекурсивно запускаем метод для правой части массива
         return;
     }
 
-    public static int GetPivotIndex(int[] inputArray, int minIndex, int maxIndex)
+    public static int GetPivotIndex(int[] inputArray, int minIndex, int maxIndex) 
     {
-        int pivotIndex = minIndex - 1;
-        for (int i = minIndex; i <= maxIndex; i++)
+        int pivotIndex = minIndex - 1;  // инициализируем pivotIndex и присваиваем ему значение "-1" (да, за границами массива)
+        for (int i = minIndex; i <= maxIndex; i++)  // проходим циклом по всему массиву (выборке из массива)
         {
-            if (inputArray[i] < inputArray[maxIndex])
+            if (inputArray[i] < inputArray[maxIndex])  // если текущий элемент выборки меньше последнего элемента выборки
             {
-                pivotIndex++;
-                Swap(ref inputArray[pivotIndex], ref inputArray[i]);
+                pivotIndex++;  // увеличиваем pivotIndex на 1
+                Swap(ref inputArray[pivotIndex], ref inputArray[i]);  // меняем местами элемент с опорным индексом и текущий элемент выборки
             }
         }
-        pivotIndex++;
-        Swap(ref inputArray[pivotIndex], ref inputArray[maxIndex]);
+        pivotIndex++;  // увеличиваем pivotIndex на 1
+        Swap(ref inputArray[pivotIndex], ref inputArray[maxIndex]);  // меняем местами элемент с опорным индексом и последний элемент выборки
         return pivotIndex;
     }
 }
